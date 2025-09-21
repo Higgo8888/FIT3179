@@ -1,0 +1,78 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 800,
+    "height": 450,
+    "title": "Goals Scored by Country in 2022 FIFA World Cup",
+    "projection": {"type": "equalEarth"},
+    "layer": [
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/WorldMapWithGraticules.topojson",
+          "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+        },
+        "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"}
+      },
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/WorldMapWithGraticules.topojson",
+          "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+        },
+        "mark": {"type": "geoshape", "fill": null, "stroke": "lightgray"}
+      },
+      {
+        "data": {
+          "values": [
+            {"country": "Argentina", "goals": 15, "latitude": -34.6037, "longitude": -58.3816},
+            {"country": "France", "goals": 16, "latitude": 48.8566, "longitude": 2.3522},
+            {"country": "Croatia", "goals": 8, "latitude": 45.8150, "longitude": 15.9819},
+            {"country": "Morocco", "goals": 6, "latitude": 34.0209, "longitude": -6.8416},
+            {"country": "England", "goals": 13, "latitude": 51.5074, "longitude": -0.1278},
+            {"country": "Netherlands", "goals": 10, "latitude": 52.3676, "longitude": 4.9041},
+            {"country": "Portugal", "goals": 12, "latitude": 38.7223, "longitude": -9.1393},
+            {"country": "Brazil", "goals": 8, "latitude": -15.8267, "longitude": -47.9218},
+            {"country": "Japan", "goals": 5, "latitude": 35.6762, "longitude": 139.6503},
+            {"country": "Senegal", "goals": 5, "latitude": 14.7167, "longitude": -17.4677},
+            {"country": "Australia", "goals": 4, "latitude": -35.2809, "longitude": 149.1300},
+            {"country": "Switzerland", "goals": 5, "latitude": 46.9480, "longitude": 7.4474},
+            {"country": "USA", "goals": 3, "latitude": 38.8977, "longitude": -77.0365},
+            {"country": "Spain", "goals": 9, "latitude": 40.4168, "longitude": -3.7038},
+            {"country": "Poland", "goals": 3, "latitude": 52.2297, "longitude": 21.0122},
+            {"country": "South Korea", "goals": 5, "latitude": 37.5665, "longitude": 126.9780},
+            {"country": "Germany", "goals": 6, "latitude": 52.5200, "longitude": 13.4050},
+            {"country": "Ecuador", "goals": 4, "latitude": -0.1807, "longitude": -78.4678},
+            {"country": "Cameroon", "goals": 4, "latitude": 3.8480, "longitude": 11.5021},
+            {"country": "Uruguay", "goals": 2, "latitude": -34.9011, "longitude": -56.1645},
+            {"country": "Tunisia", "goals": 1, "latitude": 36.8065, "longitude": 10.1815},
+            {"country": "Mexico", "goals": 2, "latitude": 19.4326, "longitude": -99.1332},
+            {"country": "Belgium", "goals": 1, "latitude": 50.8503, "longitude": 4.3517},
+            {"country": "Ghana", "goals": 5, "latitude": 5.5600, "longitude": -0.2057},
+            {"country": "Saudi Arabia", "goals": 3, "latitude": 24.7136, "longitude": 46.6753},
+            {"country": "Iran", "goals": 4, "latitude": 35.6892, "longitude": 51.3890},
+            {"country": "Costa Rica", "goals": 3, "latitude": 9.9281, "longitude": -84.0907},
+            {"country": "Denmark", "goals": 1, "latitude": 55.6761, "longitude": 12.5683},
+            {"country": "Serbia", "goals": 5, "latitude": 44.7866, "longitude": 20.4489},
+            {"country": "Wales", "goals": 1, "latitude": 51.4837, "longitude": -3.1681},
+            {"country": "Canada", "goals": 2, "latitude": 45.4215, "longitude": -75.6972},
+            {"country": "Qatar", "goals": 1, "latitude": 25.2867, "longitude": 51.5333}
+          ]
+        },
+        "mark": {"type": "circle", "tooltip": {"content": "data"}},
+        "encoding": {
+          "longitude": {"field": "longitude", "type": "quantitative"},
+          "latitude": {"field": "latitude", "type": "quantitative"},
+          "size": {
+            "field": "goals",
+            "type": "quantitative",
+            "title": "Goals Scored",
+            "scale": {"domain": [1, 16]}
+          },
+          "color": {
+            "field": "goals",
+            "type": "quantitative",
+            "title": "Goals Scored",
+            "scale": {"scheme": "reds"}
+          }
+        }
+      }
+    ]
+  }

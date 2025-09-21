@@ -1,0 +1,10 @@
+#aus_rainfall_map {
+    top:100px;
+    bottom: 100px; 
+    left: 100px;
+    right: 100px;
+}
+
+.vega-bind {
+    margin-bottom: 5px;
+}
