@@ -16,7 +16,7 @@
         }}
     ],
   "projection": {
-    "type": "equirectangular"
+    "type": "equalEarth"
   },
   
     "layer": [
@@ -80,11 +80,8 @@
             "color": {
             "field": "Life Expectancy World Bank",
             "type": "quantitative",
-            "scale": {
-                "type": "threshold",
-                "domain": [50, 60, 70, 80],
-                "range": ["#fee5d9", "#fcae91", "#fb6a4a", "#de2d26", "#a50f15"]
-            }
+            "scale": {"domain": [50, 80], "scheme": "reds"},
+            "legend": {"format": ".2s"}
             },
             "tooltip": [
             {"field": "Country Name", "type": "nominal", "title": "Country"},
