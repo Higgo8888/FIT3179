@@ -1,10 +1,22 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Global Life Expectancy 2019",
-  "width": 850,
+  "title": "Global Life Expectancy (2001-2019)",
+  "width": "container",
   "height": 500,
+    "params": [
+        {
+        "name": "Year_selection",
+        "value": 2019,
+        "bind": {
+            "input": "range",
+            "min": 2001,
+            "max": 2019,
+            "step": 1,
+            "name": "Year:  "
+        }}
+    ],
   "projection": {
-    "type": "equirectangular"
+    "type": "equalEarth"
   },
   
     "layer": [
@@ -60,7 +72,7 @@
             },
             "as": "geo"
             },
-            {"filter": "datum.Year == 2019"}
+            {"filter": "datum.Year == Year_selection"}
         ],
         "mark": {"type": "geoshape", "stroke": "#fff", "strokeWidth": 0.5},
         "encoding": {
@@ -68,7 +80,7 @@
             "color": {
             "field": "Life Expectancy World Bank",
             "type": "quantitative",
-            "scale": {"domain": [0, 80], "scheme": "greens"},
+            "scale": {"domain": [50, 80], "scheme": "reds"},
             "legend": {"format": ".2s"}
             },
             "tooltip": [
