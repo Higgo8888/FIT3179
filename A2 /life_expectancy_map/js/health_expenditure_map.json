@@ -1,0 +1,228 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 400,
+  "title": {
+    "text": "Global Burden of Communicable Diseases: Disability-Adjusted Life Years (DALYs)",
+    "subtitle": "One DALY represents the loss of one year of full health - measuring years lost to premature mortality and years lived with disability",
+    "fontSize": 16,
+    "subtitleFontSize": 12
+  },
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2019,
+      "bind": {
+        "input": "range",
+        "min": 2001,
+        "max": 2019,
+        "step": 1,
+        "name": "Select Year: "
+      }
+    }
+  ],
+  "projection": {"type": "equalEarth"},
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
+        "format": {"type": "topojson", "feature": "oceans"}
+      },
+      "mark": {"type": "geoshape", "fill": "skyblue"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/WorldMapWithGraticules.topojson",
+        "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+      },
+      "mark": {"type": "geoshape", "fill": null, "stroke": "lightgray"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/WorldMapWithGraticules.topojson",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+      },
+      "transform": [
+        {
+          "calculate": "'Data is not available in ' + datum.properties.NAME",
+          "as": "note"
+        }
+      ],
+      "mark": {"type": "geoshape", "fill": "#ddd", "stroke": "white", "strokeWidth": 1},
+      "encoding": {"tooltip": {"field": "note"}}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/Higgo8888/FIT3179/refs/heads/main/A2%20/life_expectancy_with_coordinates.csv"
+      },
+      "transform": [
+        {
+          "lookup": "Country Name",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/WorldMapWithGraticules.topojson",
+              "format": {
+                "type": "topojson",
+                "feature": "ne_110m_admin_0_countries"
+              }
+            },
+            "key": "properties.NAME"
+          },
+          "as": "geo"
+        },
+        {"filter": "datum.Year == Year_selection"}
+      ],
+      "mark": {
+        "type": "circle",
+        "tooltip": {"content": "data"},
+        "stroke": "black",
+        "strokeWidth": 0.8,
+        "opacity": 0.85
+      },
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "size": {
+          "field": "Injuries",
+          "type": "quantitative",
+          "title": "DALYs (Millions)",
+          "scale": {"domain": [1000000, 30000000], "range": [25, 650]},
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "gradientLength": 120,
+            "titleLimit": 0,
+            "format": ".0f"
+          }
+        },
+        "color": {
+          "field": "Injuries",
+          "type": "quantitative",
+          "title": "DALYs (Millions)",
+          "scale": {
+            "domain": [100000, 30000000],
+            "range": ["#ff4d4d", "#000000"]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "gradientLength": 300,
+            "titleLimit": 0,
+            "format": ".0f"
+          }
+        },
+        "tooltip": [
+          {"field": "Country Name", "type": "nominal", "title": "Country"},
+          {
+            "field": "Injuries",
+            "type": "quantitative",
+            "title": "DALYs",
+            "format": ",.0f"
+          },
+          {"field": "Region", "type": "nominal", "title": "Region"},
+          {"field": "IncomeGroup", "type": "nominal", "title": "Income Group"},
+          {"field": "Year", "type": "quantitative", "title": "Year"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/Higgo8888/FIT3179/refs/heads/main/A2%20/life_expectancy_with_coordinates.csv"
+      },
+      "transform": [
+        {
+          "lookup": "Country Name",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/WorldMapWithGraticules.topojson",
+              "format": {
+                "type": "topojson",
+                "feature": "ne_110m_admin_0_countries"
+              }
+            },
+            "key": "properties.NAME"
+          },
+          "as": "geo"
+        },
+        {
+          "filter": "datum.Year == Year_selection && (datum['Country Name'] == 'Australia' || datum['Country Name'] == 'China' || datum['Country Name'] == 'United States of America')"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 15,
+        "dy": -5,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "fill": "black"
+      },
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "text": {
+          "field": "Country Name",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/Higgo8888/FIT3179/refs/heads/main/A2%20/life_expectancy_with_coordinates.csv"
+      },
+      "transform": [
+        {
+          "lookup": "Country Name",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/WorldMapWithGraticules.topojson",
+              "format": {
+                "type": "topojson",
+                "feature": "ne_110m_admin_0_countries"
+              }
+            },
+            "key": "properties.NAME"
+          },
+          "as": "geo"
+        },
+        {
+          "filter": "datum.Year == Year_selection && (datum['Country Name'] == 'Australia' || datum['Country Name'] == 'China' || datum['Country Name'] == 'United States of America')"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 15,
+        "dy": 10,
+        "fontSize": 12,
+        "fill": "black"
+      },
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "text": {
+          "field": "Injuries",
+          "type": "quantitative",
+          "format": ",.0f"
+        }
+      }
+    }
+  ],
+  "config": {
+    "title": {
+      "anchor": "start",
+      "offset": 20
+    },
+    "legend": {
+      "orient": "bottom",
+      "direction": "horizontal",
+      "columns": 2,
+      "labelLimit": 0
+    },
+    "view": {
+      "stroke": "transparent"
+    }
+  }
+}
