@@ -1,6 +1,17 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Global Life Expectancy (2001-2019)",
+    "title": {
+    "text": "Global Life Expectancy Patterns",
+    "subtitle": "Life expectancy at birth across countries with highlighted extremes and Australia",
+    "fontSize": 25,
+    "font": "Merriweather",
+    "subtitleFont": "Open Sans",
+    "subtitleFontSize": 14,
+    "color": "#2c3e50",
+    "subtitleColor": "#7f8c8d",
+    "anchor": "start",
+    "offset": 20
+  },
   "width": "container",
   "height": 500,
     "params": [
@@ -80,8 +91,16 @@
             "color": {
             "field": "Life Expectancy World Bank",
             "type": "quantitative",
-            "scale": {"domain": [50, 80], "scheme": "reds"},
-            "legend": {"format": ".2s"}
+            "scale": {"domain": [45, 85], "range": ["#fee5d9", "#fcae91", "#fb6a4a", "#de2d26", "#a50f15"]},
+            "legend": {
+              "titleColor": "#2c3e50",
+              "labelColor": "#2c3e50",
+              "orient": "bottom",
+              "direction": "horizontal",
+              "gradientLength": 300,
+              "titleFontSize": 12,
+              "labelFontSize": 11
+          }
             },
             "tooltip": [
             {"field": "Country Name", "type": "nominal", "title": "Country"},
@@ -98,5 +117,35 @@
         }
         }
     ],
-    "config": {}
+    "config": {
+    "view": {"stroke": "transparent"},
+    "title": {
+      "anchor": "start",
+      "offset": 20,
+      "font": "Merriweather",
+      "subtitleFont": "Open Sans"
+    },
+    "axis": {
+      "labelFont": "Open Sans",
+      "titleFont": "Open Sans",
+      "labelFontSize": 11,
+      "titleFontSize": 13,
+      "titleColor": "#34495e",
+      "labelColor": "#2c3e50",
+      "domainColor": "#bdc3c7",
+      "domainWidth": 1
+    },
+    "legend": {
+      "orient": "bottom",
+      "direction": "horizontal",
+      "titleFont": "Open Sans",
+      "labelFont": "Open Sans",
+      "titleFontSize": 12,
+      "labelFontSize": 11,
+      "titleColor": "#2c3e50",
+      "labelColor": "#34495e",
+      "offset": 10,
+      "gradientLength": 300
     }
+  }
+}

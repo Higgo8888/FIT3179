@@ -1,16 +1,18 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 800,
-  "height": 500,
+  "width": 700,
+  "height": 360,
   "title": {
     "text": "Health Expenditure vs Life Expectancy by Region",
     "subtitle": "Bubble size represents CO₂ emissions, colored by geographic region",
-    "fontSize": 24,
+    "fontSize": 25,
+    "font": "Merriweather",
+    "subtitleFont": "Open Sans",
     "subtitleFontSize": 14,
-    "color": "#000000",
+    "color": "#2c3e50",
     "subtitleColor": "#7f8c8d",
     "anchor": "start",
-    "offset": 25
+    "offset": 20
   },
   "data": {
     "url": "https://raw.githubusercontent.com/Higgo8888/FIT3179/refs/heads/main/A2%20/life%20expectancy.csv"
@@ -41,7 +43,8 @@
           "East Asia & Pacific",
           "North America"
         ],
-        "name": "Filter by Region: "
+        "name": "Filter by Region: ",
+        "element": "#param-container"
       }
     },
     {
@@ -55,7 +58,6 @@
         "name": "Select Year: "
       }
     },
-    
     {
       "name": "CO2_above",
       "value": 0,
@@ -64,7 +66,7 @@
         "min": 0,
         "max": 500000,
         "step": 10000,
-        "name": "Minimum CO₂ : "
+        "name": "Minimum CO₂: "
       }
     }
   ],
@@ -84,12 +86,15 @@
       "title": "Health Expenditure (% of GDP)",
       "scale": {"domain": [0, 18]},
       "axis": {
-        "titleColor": "#000000",
-        "labelColor": "#000000",
-        "titleFontSize": 14,
-        "labelFontSize": 12,
+        "titleFont": "Open Sans",
+        "labelFont": "Open Sans",
+        "titleColor": "#34495e",
+        "labelColor": "#2c3e50",
+        "titleFontSize": 13,
+        "labelFontSize": 11,
         "gridColor": "#ecf0f1",
-        "tickColor": "#bdc3c7"
+        "tickColor": "#bdc3c7",
+        "domainColor": "#bdc3c7"
       }
     },
     "y": {
@@ -135,11 +140,15 @@
           "legend": {
             "title": "CO₂ Emissions (kt)",
             "format": ".1s",
-            "titleColor": "#000000",
-            "labelColor": "#000000",
-            "orient": "right",
-            "direction": "vertical",
-            "gradientLength": 200
+            "titleFont": "Open Sans",
+            "labelFont": "Open Sans",
+            "titleColor": "#2c3e50",
+            "labelColor": "#34495e",
+            "titleFontSize": 12,
+            "labelFontSize": 11,
+            "orient": "bottom",
+            "direction": "horizontal",
+            "gradientLength": 300
           }
         },
         "color": {
@@ -169,7 +178,7 @@
           "legend": {
             "titleColor": "#000000",
             "labelColor": "#000000",
-            "orient": "right",
+            "orient": "bottom",
             "direction": "vertical",
             "columns": 1,
             "symbolSize": 120
@@ -187,9 +196,9 @@
     {
       "mark": {
         "type": "text",
-        "align": "right",
-        "baseline": "middle",
-        "dx": -15,
+        "align": "center",
+        "baseline": "bottom",
+        "dy": -15,
         "fontSize": 11,
         "fontStyle": "italic"
       },
@@ -197,7 +206,7 @@
         "text": {"field": "Country Name", "type": "nominal"},
         "opacity": {
           "condition": {
-            "test": "datum['Country Name'] == 'China' || datum['Country Name'] == 'United States of America' || datum['Country Name'] == 'Australia' || datum['Country Name'] == 'Japan' || datum['Country Name'] == 'Brazil' || datum['Country Name'] == 'United Kingdom'",
+            "test": "datum['Country Name'] == 'Australia' || datum['Country Name'] == 'Japan' || datum['Country Name'] == 'Sierra Leone'",
             "value": 1
           },
           "value": 0
@@ -211,20 +220,23 @@
     },
     "title": {
       "anchor": "start",
-      "offset": 30
-    },
-    "legend": {
-      "orient": "right",
-      "labelLimit": 180,
-      "titleFontSize": 13,
-      "labelFontSize": 12,
-      "offset": 10
+      "offset": 20,
+      "font": "Merriweather",
+      "subtitleFont": "Open Sans"
     },
     "axis": {
+      "labelFont": "Open Sans",
+      "titleFont": "Open Sans",
       "labelFontSize": 11,
       "titleFontSize": 13,
       "domainColor": "#bdc3c7",
       "domainWidth": 1
+    },
+    "legend": {
+      "labelFont": "Open Sans",
+      "titleFont": "Open Sans",
+      "titleFontSize": 12,
+      "labelFontSize": 11
     }
   }
 }

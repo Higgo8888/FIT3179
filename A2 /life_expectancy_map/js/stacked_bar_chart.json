@@ -1,0 +1,265 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "title": {
+    "text": "Comprehensive Disease Burden Analysis by Income & Region",
+    "subtitle": "Detailed breakdown showing disease patterns across economic and geographic dimensions",
+    "fontSize": 25,
+    "font": "Merriweather",
+    "subtitleFont": "Open Sans",
+    "subtitleFontSize": 14,
+    "color": "#2c3e50",
+    "subtitleColor": "#7f8c8d",
+    "anchor": "start",
+    "offset": 20
+  },
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2019,
+      "bind": {
+        "input": "range",
+        "min": 2001,
+        "max": 2019,
+        "step": 1,
+        "name": "Select Year: "
+      }
+    },
+    {
+      "name": "Region_filter",
+      "value": null,
+      "bind": {
+        "input": "select",
+        "options": [null, "South Asia", "Sub-Saharan Africa", "Europe & Central Asia", "Middle East & North Africa", "Latin America & Caribbean", "East Asia & Pacific", "North America"],
+        "labels": [
+          "All Regions",
+          "South Asia",
+          "Sub-Saharan Africa",
+          "Europe & Central Asia",
+          "Middle East & North Africa",
+          "Latin America & Caribbean",
+          "East Asia & Pacific",
+          "North America"
+        ],
+        "name": "Filter Region: "
+      }
+    }
+  ],
+  "vconcat": [
+    {
+      "title": "Disease Burden Composition",
+      "width": 700,
+      "height": 350,
+      "view": {"stroke": null},
+      "data": {
+        "url": "https://raw.githubusercontent.com/Higgo8888/FIT3179/refs/heads/main/A2%20/life_expectancy_with_coordinates.csv"
+      },
+      "transform": [
+        {"filter": "datum.Year == Year_selection"},
+        {"filter": "Region_filter === null || datum.Region == Region_filter"},
+        {
+          "fold": ["Communicable", "NonCommunicable"],
+          "as": ["Disease_Type", "DALYs"]
+        },
+        {
+          "calculate": "datum.DALYs / 1000000",
+          "as": "DALYs_Millions"
+        },
+        {
+          "aggregate": [
+            {"op": "sum", "field": "DALYs_Millions", "as": "Total_DALYs_Millions"},
+            {"op": "mean", "field": "Life Expectancy World Bank", "as": "Avg_Life_Expectancy"}
+          ],
+          "groupby": ["IncomeGroup", "Disease_Type"]
+        },
+        {
+          "joinaggregate": [
+            {"op": "sum", "field": "Total_DALYs_Millions", "as": "Total_Group_DALYs"}
+          ],
+          "groupby": ["IncomeGroup"]
+        },
+        {
+          "calculate": "datum.Total_DALYs_Millions / datum.Total_Group_DALYs",
+          "as": "Percentage"
+        },
+        {
+          "window": [
+            {"op": "sum", "field": "Percentage", "as": "cumulative_percent"}
+          ],
+          "groupby": ["IncomeGroup"],
+          "sort": [{"field": "Disease_Type", "order": "descending"}],
+          "frame": [null, 0]
+        },
+        {
+          "calculate": "datum.cumulative_percent - (datum.Percentage / 2)",
+          "as": "label_position"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "bar",
+            "cornerRadius": 2
+          },
+          "encoding": {
+            "x": {
+              "field": "IncomeGroup",
+              "type": "nominal",
+              "title": "Income Group",
+              "sort": ["Low income", "Lower middle income", "Upper middle income", "High income"],
+              "axis": {"labelAngle": 0}
+            },
+            "y": {
+              "field": "Percentage",
+              "type": "quantitative",
+              "title": "Percentage of Disease Burden",
+              "axis": {"format": ".0%"}
+            },
+            "color": {
+              "field": "Disease_Type",
+              "type": "nominal",
+              "title": "Disease Type",
+              "scale": {
+                "domain": ["Communicable", "NonCommunicable"],
+                "range": ["#2289f4", "#de2d26"]
+              },
+              "legend": {
+                "orient": "top",
+                "direction": "horizontal"
+              }
+            },
+            "tooltip": [
+              {"field": "IncomeGroup", "type": "nominal", "title": "Income Group"},
+              {"field": "Disease_Type", "type": "nominal", "title": "Disease Type"},
+              {"field": "Total_DALYs_Millions", "type": "quantitative", "title": "DALYs (Millions)", "format": ",.1f"},
+              {"field": "Percentage", "type": "quantitative", "title": "Percentage", "format": ".1%"},
+              {"field": "Avg_Life_Expectancy", "type": "quantitative", "title": "Avg Life Expectancy", "format": ".1f"}
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "center",
+            "baseline": "middle",
+            "fontSize": 11,
+            "fontWeight": "bold",
+            "fill": "white"
+          },
+          "encoding": {
+            "x": {"field": "IncomeGroup", "type": "nominal"},
+            "y": {
+              "field": "label_position",
+              "type": "quantitative",
+              "stack": null
+            },
+            "text": {
+              "field": "Percentage",
+              "type": "quantitative",
+              "format": ".1%"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Regional Breakdown within Income Groups",
+      "height": 500,
+      "width": 700,
+      "view": {"stroke": null},
+      "data": {
+        "url": "https://raw.githubusercontent.com/Higgo8888/FIT3179/refs/heads/main/A2%20/life_expectancy_with_coordinates.csv"
+      },
+      "transform": [
+        {"filter": "datum.Year == Year_selection"},
+        {"filter": "Region_filter === null || datum.Region == Region_filter"},
+        {
+          "fold": ["Communicable", "NonCommunicable"],
+          "as": ["Disease_Type", "DALYs"]
+        },
+        {
+          "calculate": "datum.DALYs / 1000000",
+          "as": "DALYs_Millions"
+        },
+        {
+          "aggregate": [
+            {"op": "sum", "field": "DALYs_Millions", "as": "Total_DALYs_Millions"},
+            {"op": "mean", "field": "Life Expectancy World Bank", "as": "Avg_Life_Expectancy"}
+          ],
+          "groupby": ["IncomeGroup", "Region", "Disease_Type"]
+        }
+      ],
+      "facet": {
+        "field": "IncomeGroup",
+        "type": "nominal",
+        "title": "Income Group",
+        "columns": 2,
+        "sort": ["Low income", "Lower middle income", "Upper middle income", "High income"]
+      },
+      "spec": {
+        "height": 400,
+        "width": 165,
+        "view": {"stroke": null},
+        "mark": {
+          "type": "bar",
+          "cornerRadius": 2
+        },
+        "encoding": {
+          "x": {
+            "field": "Region",
+            "type": "nominal",
+            "title": "Region",
+            "axis": {"labelAngle": -45}
+          },
+          "y": {
+            "field": "Total_DALYs_Millions",
+            "type": "quantitative",
+            "title": "DALYs (Millions)"
+          },
+          "color": {
+            "field": "Disease_Type",
+            "type": "nominal",
+            "title": "Disease Type",
+            "scale": {
+              "domain": ["Communicable", "NonCommunicable"],
+              "range": ["#2289f4", "#de2d26"]
+            }
+          },
+          "tooltip": [
+            {"field": "Region", "type": "nominal", "title": "Region"},
+            {"field": "Disease_Type", "type": "nominal", "title": "Disease Type"},
+            {"field": "Total_DALYs_Millions", "type": "quantitative", "title": "DALYs (Millions)", "format": ",.1f"},
+            {"field": "Avg_Life_Expectancy", "type": "quantitative", "title": "Avg Life Expectancy", "format": ".1f"}
+          ]
+        }
+      }
+    }
+  ],
+  "config": {
+    "title": {
+      "anchor": "start",
+      "offset": 20,
+      "font": "Merriweather",
+      "subtitleFont": "Open Sans"
+    },
+    "axis": {
+      "labelFont": "Open Sans",
+      "titleFont": "Open Sans",
+      "labelFontSize": 11,
+      "titleFontSize": 13,
+      "titleColor": "#34495e",
+      "labelColor": "#2c3e50",
+      "domainColor": "#bdc3c7",
+      "domainWidth": 1
+    },
+    "legend": {
+      "labelFont": "Open Sans",
+      "titleFont": "Open Sans",
+      "titleFontSize": 12,
+      "labelFontSize": 11,
+      "titleColor": "#2c3e50",
+      "labelColor": "#34495e"
+    },
+    "view": {"stroke": "transparent"}
+  }
+}

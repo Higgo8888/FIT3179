@@ -1,12 +1,20 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container",
+  "width": 590,
   "height": 400,
   "title": {
-    "text": "Global Burden of Communicable Diseases: Disability-Adjusted Life Years (DALYs)",
-    "subtitle": "One DALY represents the loss of one year of full health - measuring years lost to premature mortality and years lived with disability",
-    "fontSize": 16,
-    "subtitleFontSize": 12
+    "text": ["Global Burden of Communicable Diseases:",
+     "Disability-Adjusted Life Years (DALYs)"],
+    "subtitle": ["One DALY represents the loss of one year of full health,",
+    "measuring years lost to premature mortality and years lived with disability"],
+    "fontSize": 25,
+    "font": "Merriweather",
+    "subtitleFont": "Open Sans",
+    "subtitleFontSize": 14,
+    "color": "#2c3e50",
+    "subtitleColor": "#7f8c8d",
+    "anchor": "start",
+    "offset": 20
   },
   "params": [
     {
@@ -213,13 +221,21 @@
   "config": {
     "title": {
       "anchor": "start",
-      "offset": 20
+      "offset": 20,
+      "font": "Merriweather",
+      "subtitleFont": "Open Sans"
     },
     "legend": {
       "orient": "bottom",
       "direction": "horizontal",
       "columns": 2,
-      "labelLimit": 0
+      "labelLimit": 0,
+      "titleFont": "Open Sans",
+      "labelFont": "Open Sans",
+      "titleFontSize": 12,
+      "labelFontSize": 11,
+      "titleColor": "#2c3e50",
+      "labelColor": "#34495e"
     },
     "view": {
       "stroke": "transparent"
