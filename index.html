@@ -2,8 +2,8 @@
 <html>
 
 <head>
-  <title>Multiple Visualisations | An Example</title>
-  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <title>Global Health & Life Expectancy Dashboard</title>
+  <!-- Import Vega & Vega-Lite -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
@@ -16,8 +16,7 @@
   <!-- Google font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <!-- CSS file -->
   <link rel="stylesheet" type="text/css" href="A2 /life_expectancy_map/css/styles.css" media="all">
 
@@ -28,56 +27,400 @@
 
   <div class="page">
 
-    <!-- pure grid group -->
+    <!-- Header Section -->
     <div class="pure-g">
       <div class="pure-u-1-1">
-        <h1>Global Burden of Communicable Diseases</h1>
-        <p>This dashboard explores the global impact of communicable diseases through Disability-Adjusted Life Years (DALYs), measuring years lost to premature mortality and years lived with disability across different countries and time periods.</p>
-      </div>
-    </div>
-    <!-- end pure grid group -->
-
-    <!-- pure grid group -->
-    <div class="pure-g">
-      <div class="pure-u-1">
-        <div id="vis1" class="vis-container"></div>
-      </div>
-    </div>
-    <!-- end pure grid group -->
-
-    <div class="pure-u-1">
-        <div class="description description-right">
-            <h2>Understanding Disease Burden Patterns</h2>
-            <p>The map visualization shows how communicable disease burden varies globally. 
-                Countries with darker red colors and larger circles indicate higher DALY values, 
-                representing greater health impact from diseases such as respiratory infections, 
-                HIV/AIDS, tuberculosis, and malaria. Use the year slider to observe how these patterns have evolved over time.</p>
+        <h1>The Global Health Divide: Understanding Life Expectancy Patterns</h1>
+        <p class="intro-paragraph">A comprehensive analysis of how economic development, healthcare investment, and disease patterns shape the lifespan of nations (2001-2019)</p>
+        
+        <div class="highlight">
+          <h3 style="color: white; margin-top: 0;">The Central Question: Why does a child born in Japan lives 30 years longer than one born in Sierra Leone?</h3>
+          <p>This dashboard explores the complex interplay of factors that create dramatic disparities in life expectancy across our world. Through five interconnected visualizations, we uncover the stories behind the numbers.</p>
         </div>
       </div>
-
-    <!-- pure grid group -->
-    <div class="pure-g">
-      <div class="pure-u-1">
-        <div id="vis2" class="vis-container"></div>
-      </div>
-
-
     </div>
-    <!-- end pure grid group -->
 
+    <!-- Global Overview Section -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h2>The Global Landscape: A World of Contrasts</h2>
+      </div>
+    </div>
+
+    <!-- Choropleth Map - Full Width -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div id="choropleth_map" class="vis-container"></div>
+      </div>
+    </div>
+
+        <!-- Life Expectancy Extremes Section -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h2>Life Expectancy Extremes: A Tale of Two Worlds</h2>
+      </div>
+    </div>
+
+    <div class="pure-g equal-height-columns">
+      <div class="pure-u-1-3">
+        <div class="description description-left equal-height-content">
+          <h3>The Longevity Champions</h3>
+          <div class="country-highlight" style="background-color: #e8f4fd; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+            <h4 style="color: #2c3e50; margin-top: 0;">Japan: 84.3 Years</h4>
+            <p>Japan consistently leads global life expectancy rankings, with citizens living an average of 84.3 years. Key factors include:</p>
+            <ul>
+              <li>Universal healthcare system with high accessibility</li>
+              <li>Traditional diet rich in fish, vegetables, and fermented foods</li>
+              <li>Strong social cohesion and community support for elderly</li>
+              <li>Low rates of obesity and heart disease</li>
+            </ul>
+          </div>
+          
+          <div class="country-highlight" style="background-color: #e8f4fd; padding: 15px; border-radius: 5px;">
+            <h4 style="color: #2c3e50; margin-top: 0;">Australia: 83.4 Years</h4>
+            <p>Australia ranks among the top 10 globally with a life expectancy of 83.4 years, comparable to other developed nations like:</p>
+            <ul>
+              <li>Switzerland (83.8 years)</li>
+              <li>South Korea (83.5 years)</li>
+              <li>Spain (83.4 years)</li>
+            </ul>
+            <p>Australia's success stems from its robust healthcare system, high standard of living, and effective public health policies including the Pharmaceutical Benefits Scheme and Medicare.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="pure-u-1-3">
+        <div class="description equal-height-content">
+          <h3>The Global Divide</h3>
+          <div class="comparison-box" style="text-align: center; padding: 20px; background: linear-gradient(to bottom, #e8f4fd, #d4e9fa); border-radius: 5px; margin-bottom: 20px;">
+            <div style="font-size: 2.5em; font-weight: bold; color: #2c3e50;">30+ Years</div>
+            <p style="margin: 10px 0 0 0; font-weight: 600;">Life expectancy gap between highest and lowest countries</p>
+          </div>
+
+          <p>The world map reveals stark regional divides. Notice the deep red clusters in <strong>North America, Europe, and Australia</strong>, where life expectancy consistently exceeds 75 years. Contrast this with the light red regions across <strong>Sub-Saharan Africa</strong>, where many nations struggle to reach 55 years.</p>
+          
+          <p>This staggering difference represents one of the most profound health inequities of our time. A child born in Sierra Leone faces challenges that reduce their potential lifespan by more than three decades compared to their Japanese counterpart.</p>
+          
+          <div class="key-finding">
+            <strong>The Australian Context:</strong> Australians enjoy life expectancy 28 years longer than citizens of Sierra Leone and approximately 15 years longer than the global average of 68 years. Australia's position reflects successful public health policies and healthcare infrastructure.
+          </div>
+          
+          <!-- Empty space to balance height -->
+          <div style="height: 40px;"></div>
+        </div>
+      </div>
+      
+      <div class="pure-u-1-3">
+        <div class="description description-right equal-height-content">
+          <h3>The Challenges at the Bottom</h3>
+          <div class="country-highlight" style="background-color: #fde8e8; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+            <h4 style="color: #2c3e50; margin-top: 0;">Sierra Leone: 54.3 Years</h4>
+            <p>At the bottom of global rankings, Sierra Leone's citizens face multiple barriers to long life:</p>
+            <ul>
+              <li>High infant and maternal mortality rates</li>
+              <li>Limited access to healthcare facilities and professionals</li>
+              <li>Endemic infectious diseases including malaria and tuberculosis</li>
+              <li>Poverty and food insecurity affecting nutrition</li>
+              <li>Limited sanitation and clean water access</li>
+            </ul>
+          </div>
+          
+          <p>Other countries with similarly low life expectancy include Central African Republic (53.9 years), Chad (54.2 years), and Nigeria (54.7 years), primarily concentrated in Sub-Saharan Africa.</p>
+          
+          <!-- Additional content to balance height -->
+          <div style="margin-top: 20px; padding: 15px; background-color: #f9f9f9; border-radius: 5px;">
+            <p><strong>Regional Pattern:</strong> The lowest life expectancies are consistently found in Sub-Saharan Africa, where healthcare infrastructure, economic development, and disease burden create significant challenges that contrast sharply with Australia's health advantages.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bubble Graph Insights -->
+    <div class="pure-g">
+      <div class="pure-u-2-3">
+        <div id="health_wealth_bubble" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1-3">
+        <div class="description description-left">
+          <h3>The Health Investment Paradox</h3>
+          <p>This bubble chart reveals critical insights about the relationship between healthcare spending and life outcomes. Notice how nations cluster in distinct patterns that tell a story of efficiency, priorities, and systemic effectiveness.</p>
+          
+          <div class="insight-box">
+            <strong>Australia's Position:</strong> Australia achieves excellent life expectancy outcomes with moderate healthcare spending compared to nations like the United States. This reflects the cost-effectiveness of Australia's mixed public-private healthcare system.
+            <ul>
+              <li>Universal coverage through Medicare</li>
+              <li>Strong preventive health programs</li>
+              <li>Effective pharmaceutical subsidies</li>
+              <li>High-quality primary care access</li>
+            </ul>
+          </div>
+          <div class="side-note">
+            <strong>The CO₂ Dimension:</strong> Bubble size represents carbon emissions, revealing an important correlation as nations develop and life expectancy increases, environmental impacts often rise, creating a sustainability challenge for emerging economies.
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Health-Wealth Relationship -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="description">
+          <h3>The Health-Wealth Connection: More Than Just Money</h3>
+          <div class="pure-g">
+            <div class="pure-u-1-3">
+              <span class="stat-number">2.5×</span>
+              <span class="stat-label">Higher health spending in high-income vs low-income countries</span>
+            </div>
+            <div class="pure-u-1-3">
+              <span class="stat-number">15-20 yrs</span>
+              <span class="stat-label">Life expectancy gap between income groups</span>
+            </div>
+            <div class="pure-u-1-3">
+              <span class="stat-number">73%</span>
+              <span class="stat-label">Of life expectancy variation explained by economic factors</span>
+            </div>
+          </div>
+          <p>The bubble chart reveals a powerful correlation: as nations invest more in healthcare (x-axis), life expectancy rises (y-axis). However, the relationship isn't perfectly linear. Some nations achieve remarkable health outcomes with modest spending, while others spend considerably for smaller gains.</p>
+          
+          <div class="key-finding">
+            <strong>Notable Outliers:</strong> Cuba demonstrates that strong public health systems can achieve first-world health outcomes with developing-world resources. Meanwhile, Australia shows how balanced healthcare investment combined with strong public health infrastructure delivers world-class outcomes efficiently.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Disease Burden Analysis Section -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h2>The Epidemiological Transition: From Infections to Chronic Diseases</h2>
+      </div>
+    </div>
+
+    <!-- Disease Transition Explanation -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="description">
+          <h3>The Great Disease Shift</h3>
+          <p>As societies develop, they undergo a fundamental transformation in their disease profiles. This "epidemiological transition" marks the shift from dying young from infections to living longer with chronic conditions.</p>
+          
+          <div class="pure-g">
+            <div class="pure-u-1-2">
+              <h4>Stage 1: The Age of Pestilence and Famine</h4>
+              <p><strong>Low-income countries</strong> face a double burden: high rates of infectious diseases combined with emerging chronic conditions. Malaria, tuberculosis, and diarrheal diseases claim millions of lives, particularly among children.</p>
+            </div>
+            <div class="pure-u-1-2">
+              <h4>Stage 2: The Age of Degenerative Diseases</h4>
+              <p><strong>High-income countries like Australia</strong> have largely conquered infectious diseases but now face epidemics of heart disease, cancer, and diabetes; diseases of aging and lifestyle. Australia's health system has successfully transitioned to focus on chronic disease management.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Disease Composition Charts -->
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <div class="description description-left">
+          <h3>DALY Burdens Geographical Patterns</h3>
+          <p><strong>Geographic Hotspots:</strong> The world map reveals concentrated DALY burdens in specific regions that directly correlate with the disease composition patterns. Sub-Saharan Africa shows the highest density of large, dark circles indicating massive DALY losses primarily from communicable diseases.</p>
+          
+          <div class="insight-box">
+            <strong>Australia's Disease Profile:</strong> As a high-income nation, Australia shows the characteristic pattern of developed countries with minimal communicable disease burden but significant challenges with non-communicable diseases. This reflects Australia's successful public health measures against infectious diseases.
+            
+          </div>
+
+          <p><strong>South & Eastern Asia:</strong> The map shows dense clusters of large circles indicating high DALY burdens, despite being in the transitional phase of typical middle-income countries; there is still significant communicable disease burden but growing non-communicable disease presence.</p>
+        </div>
+      </div>
+      <div class="pure-u-1-2">
+        <div id="disease_composition" class="vis-container"></div>
+      </div>
+    </div>
+
+
+    <!-- Regional Disease Burden Section -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="description description-left">
+          <h3>Reading the Disease Transition</h3>
+          <p>The stacked bar chart visualizes this transition across income groups. Notice how:</p>
+          <ul>
+            <li><strong style="color: #2289f4;">Blue segments (Communicable)</strong> dominate in low-income countries</li>
+            <li><strong style="color: #de2d26;">Red segments (Non-communicable)</strong> take over in high-income countries like Australia</li>
+            <li><strong>Middle-income countries</strong> show a mixed burden, caught in transition</li>
+          </ul>
+          
+          <div class="insight-box">
+            <strong>The Australian Experience:</strong> Australia's health system has successfully navigated the epidemiological transition, with non-communicable diseases now accounting for over 90% of the disease burden. This success comes from decades of investment in public health infrastructure, medical research, and healthcare accessibility.
+          </div>
+
+          <p><strong>Communicable Diseases:</strong> Malaria, TB, HIV, respiratory infections, diarrheal diseases<br>
+          <strong>Non-Communicable Diseases:</strong> Heart disease, cancer, diabetes, chronic respiratory diseases</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Regional Disease Burden Chart -->
+    <div class="pure-g">
+      <div class="pure-u-2-3">
+        <div id="regional_disease" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1-3">
+        <div class="description description-right">
+          <h3>Regional Variations in Disease Burden</h3>
+          <p>Even within the same income groups, geographic regions show distinct disease patterns:</p>
+          
+          <p><strong>Sub-Saharan Africa:</strong> Highest communicable disease burden, with HIV/AIDS and malaria creating devastating impacts.</p>
+          
+          <p><strong>South Asia:</strong> Transitioning rapidly, with both infectious diseases and rising diabetes and heart disease rates.</p>
+          
+          <p><strong>Australia & Oceania:</strong> Dominated by non-communicable diseases, with Australia showing world-class management of cardiovascular diseases and cancer through advanced healthcare systems and public health initiatives.</p>
+
+          <div class="key-finding">
+            <strong>Australia's Regional Leadership:</strong> Within the East Asia & Pacific region, Australia demonstrates how comprehensive healthcare systems and public health policies can achieve world-leading health outcomes, serving as a model for regional development.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Country Performance Section -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h2>National Performance: Beating the Odds</h2>
+      </div>
+    </div>
+
+    <!-- Regional Comparison Explanation -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="description">
+          <h3>Beyond Averages: Country-Level Stories</h3>
+          <p>While regional and income patterns are important, individual country policies and healthcare systems create significant variations. Some nations consistently outperform their regional peers, while others lag behind despite similar economic conditions.</p>
+          
+          <div class="pure-g">
+            <div class="pure-u-1-3">
+              <h4>Overachievers</h4>
+              <p>Countries that invest wisely in public health, education, and social safety nets often punch above their weight class in health outcomes.</p>
+            </div>
+            <div class="pure-u-1-3">
+              <h4>Underperformers</h4>
+              <p>Nations facing conflict, corruption, or poor governance often see health outcomes stagnate despite economic growth.</p>
+            </div>
+            <div class="pure-u-1-3">
+              <h4>The Australian Model</h4>
+              <p>Australia demonstrates how consistent investment in healthcare infrastructure and public health policies delivers sustainable improvements in population health outcomes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Regional Comparison Chart -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div id="regional_comparison" class="vis-container"></div>
+      </div>
+    </div>
+
+    <!-- Country Performance Analysis -->
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <div class="description description-left">
+          <h3>Interpreting Country Performance</h3>
+          <p>The diverging bar chart compares each country against its regional average. Blue bars extend right (above average), red bars extend left (below average).</p>
+          
+          <p><strong>Notable Patterns:</strong></p>
+          <ul>
+            <li><strong>Cuba</strong> in Latin America: Achieves first-world health outcomes through universal healthcare</li>
+            <li><strong>Rwanda</strong> in Africa: Remarkable recovery and health system rebuilding post-genocide</li>
+            <li><strong>Australia</strong> in East Asia & Pacific: Consistently outperforms regional averages through comprehensive healthcare and public health systems</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pure-u-1-2">
+        <div class="description description-right">
+          <h3>What Drives Outperformance?</h3>
+          <p>Countries that beat their regional averages typically share:</p>
+          <ul>
+            <li><strong>Strong primary healthcare systems</strong> with good access in rural areas</li>
+            <li><strong>High educational attainment</strong>, especially for women</li>
+            <li><strong>Effective public health interventions</strong> (vaccination, sanitation)</li>
+            <li><strong>Political stability</strong> and good governance</li>
+            <li><strong>Equitable distribution</strong> of health resources</li>
+          </ul>
+          
+          <div class="insight-box">
+            <strong>The Australian Advantage:</strong> Australia's Medicare system, Pharmaceutical Benefits Scheme, and strong public health infrastructure demonstrate how smart policy choices can deliver world-class health outcomes efficiently.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conclusion -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="conclusion">
+          <h2 style="color: white; border-bottom-color: white;">Key Takeaways: The Path to Longer, Healthier Lives</h2>
+          
+          <div class="pure-g">
+            <div class="pure-u-1-3">
+              <h4 style="color: #3498db;">Economic Development is Necessary But Not Sufficient</h4>
+              <p>While wealth enables better health outcomes, how resources are allocated and healthcare systems are designed determines actual results. Australia demonstrates that targeted healthcare investment within a mixed public-private model can achieve exceptional outcomes.</p>
+            </div>
+            <div class="pure-u-1-3">
+              <h4 style="color: #3498db;">The Epidemiological Transition is Universal But Variable</h4>
+              <p>All societies shift from infectious to chronic diseases, but the pace and management of this transition varies dramatically. Australia's success in managing this transition offers lessons for developing nations.</p>
+            </div>
+            <div class="pure-u-1-3">
+              <h4 style="color: #3498db;">Smart Policies Can Overcome Economic Limitations</h4>
+              <p>Countries like Cuba and Costa Rica demonstrate that focused public health investments can achieve remarkable outcomes regardless of economic constraints. Australia shows how sustained policy commitment builds resilient health systems.</p>
+            </div>
+          </div>
+          
+          <div style="margin-top: 25px; padding: 20px; background-color: rgba(255,255,255,0.1); border-radius: 5px;">
+            <h4 style="color: white; margin-top: 0;">The Australian Perspective: Lessons in Health System Design</h4>
+            <p>Australia's position among global health leaders underscores the importance of balanced healthcare systems that combine universal coverage with private innovation. The Australian experience with Medicare, the PBS, and preventive health initiatives provides a valuable blueprint for nations seeking to improve population health outcomes while managing costs effectively. As global health challenges evolve, Australia's adaptive approach to healthcare delivery offers insights for both developed and developing nations navigating their own health transitions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="pure-g">
+      <div class="pure-u-1-1 small-font">
+        <p>This dashboard was created using Vega-Lite visualizations. Data source: <a href="https://raw.githubusercontent.com/Higgo8888/FIT3179/refs/heads/main/A2%20/life_expectancy_with_coordinates.csv" target="_blank" style="color: #3498db;">Global Life Expectancy Dataset</a>. Analysis based on World Bank and WHO health indicators for 2001-2019.</p>
+      </div>
+    </div>
 
   </div> <!-- end page -->
 
   <script type="text/javascript">
-    var specVis1 = "A2 /life_expectancy_map/js/health_expenditure_map.json";
-    var specVis2 = "A2 /life_expectancy_map/js/life_expec.json";
+    // Specify the visualization specifications
+    var specChoropleth = "A2 /life_expectancy_map/js/life_expec_filter.json";
+    var specBubbleChart = "A2 /life_expectancy_map/js/bubble_health_wealth.json";
+    var specDiseaseComposition = "A2 /life_expectancy_map/js/health_expenditure_map.json";
+    var specRegionalDisease = "A2 /life_expectancy_map/js/stacked_bar_chart.json";
+    var specRegionalComparison = "A2 /life_expectancy_map/js/diverging_bar_chart.json";
 
-    vegaEmbed('#vis1', specVis1, { "actions": false });
-
-    vegaEmbed('#vis2', specVis2, { "actions": false }).then(function (result) {
-      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    // Embed the visualizations in the containers with IDs
+    vegaEmbed('#choropleth_map', specChoropleth, { "actions": false }).catch(console.error);
+    
+    vegaEmbed('#health_wealth_bubble', specBubbleChart, { "actions": false }).then(function(result) {
+      // Access the Vega view instance if needed
     }).catch(console.error);
-
+    
+    vegaEmbed('#disease_composition', specDiseaseComposition, { "actions": false }).then(function(result) {
+      // Access the Vega view instance if needed
+    }).catch(console.error);
+    
+    vegaEmbed('#regional_disease', specRegionalDisease, { "actions": false }).then(function(result) {
+      // Access the Vega view instance if needed
+    }).catch(console.error);
+    
+    vegaEmbed('#regional_comparison', specRegionalComparison, { "actions": false }).then(function(result) {
+      // Access the Vega view instance if needed
+    }).catch(console.error);
   </script>
 </body>
 
