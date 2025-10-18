@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 700,
-  "height": 360,
+  "height": 435,
   "title": {
     "text": "Health Expenditure vs Life Expectancy by Region",
     "subtitle": "Bubble size represents CO₂ emissions, colored by geographic region",
