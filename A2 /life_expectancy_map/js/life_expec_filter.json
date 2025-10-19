@@ -66,7 +66,7 @@
         },
         {
         "data": {
-            "url": "https://raw.githubusercontent.com/Higgo8888/FIT3179/refs/heads/main/A2%20/life%20expectancy.csv"
+            "url": "https://raw.githubusercontent.com/Higgo8888/FIT3179/refs/heads/main/A2%20/life_expectancy_with_coordinates.csv"
         },
         "transform": [
             {
